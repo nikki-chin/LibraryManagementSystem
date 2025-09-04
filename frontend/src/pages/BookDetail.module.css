@@ -1,0 +1,39 @@
+.bookDetailContainer {
+  display: flex;
+  gap: 40px;       
+  padding: 20px;
+}
+
+.leftColumn {
+  flex: 2;        
+}
+
+.rightColumn {
+  flex: 1;         
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.coverImage {
+  width: 100%;
+  max-width: 250px;  
+  height: auto;
+  border-radius: 8px;
+}
+
+.adminButtons button,
+.borrowSection button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.borrowSection p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
