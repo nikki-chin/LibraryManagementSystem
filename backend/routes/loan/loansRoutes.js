@@ -1,6 +1,6 @@
 import express from 'express'
 import { Loan } from '../../models/loanModel.js'
-import { authMiddleware } from '../../middleware/authMiddleware.js';
+import { authMiddleware, isAdmin } from '../../middleware/authMiddleware.js';
 import { Book } from '../../models/bookModel.js';
 import mongoose from 'mongoose';
 
@@ -71,7 +71,7 @@ router.put('/return/:id', authMiddleware, async (request, response) => {
     }
 });
 
-router.get('/', authMiddleware, async (request, response) => {
+router.get('/', authMiddleware, isAdmin, async (request, response) => {
     if (request.user.role !== 'admin') {
         return response.status(403).json({ message: 'Access denied' });
     }
@@ -86,7 +86,7 @@ router.get('/', authMiddleware, async (request, response) => {
 
 });
 
-router.get("/active", authMiddleware, async (request, response) => {
+router.get("/active", authMiddleware, isAdmin, async (request, response) => {
   try {
     const loans = await Loan.find({ returnDate: null })
       .populate("bookId")
@@ -97,7 +97,7 @@ router.get("/active", authMiddleware, async (request, response) => {
   }
 });
 
-router.get("/overdue", authMiddleware, async (req, res) => {
+router.get("/overdue", authMiddleware, isAdmin, async (req, res) => {
   try {
     const now = new Date();
     const loans = await Loan.find({

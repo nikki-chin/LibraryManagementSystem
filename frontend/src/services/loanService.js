@@ -2,17 +2,20 @@ import api from "../api.js";
 
 export async function borrowBook(bookId) {
     try {
-        await api.post(`http://localhost:8080/loan/borrow/${bookId}`);
+        const loan = await api.post(`/loan/borrow/${bookId}`);
         console.log("bookId: ", bookId, " is borrowed");
 
+        return loan;
     } catch (error) {
-        console.log("borrow book error: ", error);
+         console.error("borrow book error (after interceptors):", error);
+
+         throw error;
     }
 }
 
 export async function returnBook(bookId) {
     try {
-        await api.put(`http://localhost:8080/loan/return/${bookId}`);
+        await api.put(`/loan/return/${bookId}`);
         console.log("BookId: ", bookId, "is returned");
     } catch (error) {
         console.log("return book error: ", error)

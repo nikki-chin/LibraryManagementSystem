@@ -1,12 +1,12 @@
 import express from 'express'
 import { Book } from '../models/bookModel.js'
-import { authMiddleware } from '../middleware/authMiddleware.js';
+import { authMiddleware, isAdmin } from '../middleware/authMiddleware.js';
 import { getAllBooks, getOneBook } from '../controllers/bookController.js';
 
 const router = express.Router();
 
 //Save new book
-router.post('/', authMiddleware, async (request, response) => {
+router.post('/', authMiddleware, isAdmin, async (request, response) => {
     try{
         if(request.user.role !== 'admin'){
             return response.status(403).json({ message: 'Access denied' });
@@ -73,7 +73,7 @@ router.get('/:id', async (request, response) => {
 });
 
 //update a book
-router.put('/:id', authMiddleware, async (request, response) => {
+router.put('/:id', authMiddleware, isAdmin, async (request, response) => {
     try{
         if(request.user.role !== 'admin'){
             return response.status(403).json({ message: 'Access denied' });
@@ -109,7 +109,7 @@ router.put('/:id', authMiddleware, async (request, response) => {
 });
 
 //delete a book
-router.delete('/:id', authMiddleware, async (request, response) => {
+router.delete('/:id', authMiddleware, isAdmin, async (request, response) => {
     try {
         if(request.user.role !== 'admin'){
             return response.status(403).json({ message: 'Access denied' });

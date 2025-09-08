@@ -24,8 +24,8 @@ const ActiveLoans = () => {
       ) : (
         loans.map((loan) => (
           <div key={loan._id} style={{ border: "1px solid black", margin: "10px", padding: "10px" }}>
-            <p><b>Book:</b> {loan.bookId.title}</p>
-            <p><b>User:</b> {loan.userId.email}</p>
+            <p><b>Book:</b> {loan.bookId?.title || "Unkown Book"}</p>
+            <p><b>User:</b> {loan.userId?.email || "Unkown User"}</p>
             <p><b>Borrow Date:</b> {new Date(loan.borrowDate).toLocaleDateString()}</p>
           </div>
         ))

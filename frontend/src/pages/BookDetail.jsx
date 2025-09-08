@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from './BookDetail.module.css';
 import { getOneBookWithStatus, deleteBook } from "../services/bookService.js";
 import { borrowBook, returnBook } from "../services/loanService.js";
+import BackButton from "../components/BackButton.jsx";
 
 const BookDetail = ({ user }) => {
     const { id } = useParams();
@@ -25,8 +26,9 @@ const BookDetail = ({ user }) => {
     const handleBorrow = async () => {
         if (!user) return;
 
-        await borrowBook(id);
-        alert(`You borrowed ${book.title}`);
+        const borrowedBook = await borrowBook(id);
+        if(borrowedBook)
+            alert(`You borrowed ${book.title}`);
     };
 
     const handleReturn = async () => {
@@ -61,9 +63,9 @@ const BookDetail = ({ user }) => {
 
     return (
         <div className={styles.bookDetailContainer}>
-
+            <BackButton />
             <div className={styles.leftColumn}>
-                <h1>{book.title}</h1>
+                <h2>{book.title}</h2>
                 <p>Author: {book.author}</p>
                 <p>ISBN: {book.isbn}</p>
                 <p>Genre: {book.genre}</p>

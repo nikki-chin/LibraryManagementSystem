@@ -65,12 +65,22 @@ router.post('/login', async (request, response) => {
 
         //jwt
         const accessToken = jwt.sign(
-            { id: user._id, role: user.role },
+            { 
+                id: user._id,
+                email: user.email,
+                name: user.name,
+                role: user.role 
+            },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "15m" });
+            { expiresIn: "1m" });
 
         const refreshToken = jwt.sign(
-            { id: user._id, role: user.role },
+            {
+                id: user._id, 
+                email: user.email,
+                name: user.name,
+                role: user.role,
+            },
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: "7d" });
 
@@ -79,20 +89,23 @@ router.post('/login', async (request, response) => {
 
         response.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: true,
-            sameSite: "strict",
+            secure: false,
+            sameSite: "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
+        //sameSite: "strict",
+        //secure: true
 
-        response.json({ 
-            email: user.email, 
-            role: user.role, 
+        response.json({
+            email: user.email,
+            role: user.role,
             name: user.name,
             id: user._id,
-            accessToken: accessToken, 
-            refreshToken: refreshToken });
+            accessToken: accessToken,
+            refreshToken: refreshToken
+        });
 
-            console.log("Login response accessToken:", accessToken);
+        console.log("Login response accessToken:", accessToken);
 
     } catch (error) {
         console.log(error.message);
@@ -102,6 +115,7 @@ router.post('/login', async (request, response) => {
 
 router.post('/refresh', async (request, response) => {
     const refreshToken = request.cookies.refreshToken;
+    console.log("refreshToken cookie:", request.cookies.refreshToken);
     if (!refreshToken) {
         return response.status(401).send({ message: "no token" });
     }
@@ -116,15 +130,17 @@ router.post('/refresh', async (request, response) => {
 
         const newAccessToken = jwt.sign(
             {
-                id: user._id,
-                role: user.role
+                email: user.email,
+                role: user.role,
+                name: user.name,
+                id: user.id
             },
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "15m" });
 
-        response.json(newAccessToken);
+        response.json({accessToken: newAccessToken});
     });
-})
+});
 
 router.delete('/logout', async (request, response) => {
     const refreshToken = request.cookies.refreshToken;

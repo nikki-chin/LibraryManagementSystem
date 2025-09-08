@@ -48,6 +48,11 @@ const AdminDashboard = (user) => {
         <h3>Add New Book</h3>
         <button onClick={() => navigate("/admin/books/add")}>Add</button>
       </div>
+
+      <div>
+        <h3>Add Book with Google API</h3>
+        <button onClick={() => navigate("/admin/books/addbookbyisbn")}>Add by isbn</button>
+      </div>
     </div>
     
   );

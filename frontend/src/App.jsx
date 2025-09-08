@@ -12,6 +12,8 @@ import AddBook from './pages/AddBook';
 import ActiveLoans from './pages/ActiveLoans';
 import OverdueLoans from './pages/OverdueLoans';
 import ViewAllLoans from './pages/ViewAllLoans';
+import AdminRoute from '../AdminRoute'
+import AddBookByIsbn from './pages/AddBookByIsbn';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,11 +48,42 @@ function App() {
         <Route path='/books/edit/:id' element={<EditBook />} />
         <Route path='/loan/:id' element={<LoanHistory user={user} />} />
 
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/loans" element={<ViewAllLoans />} />
-        <Route path="/admin/loans/active" element={<ActiveLoans />} />
-        <Route path="/admin/loans/overdue" element={<OverdueLoans />} />
-        <Route path="/admin/books/add" element={<AddBook />} />
+        <Route path="/admin" element={
+          <AdminRoute user={user}>
+            <AdminDashboard />
+          </AdminRoute>
+        } />
+
+        <Route path="/admin/loans" element={
+          <AdminRoute user={user}>
+            <ViewAllLoans />
+          </AdminRoute>
+        } />
+
+        <Route path="/admin/loans/active" element={
+          <AdminRoute user={user}>
+            <ActiveLoans />
+          </AdminRoute>
+        } />
+
+        <Route path="/admin/loans/overdue" element={
+          <AdminRoute user={user}>
+            <OverdueLoans />
+          </AdminRoute>
+        } />
+
+        <Route path="/admin/books/add" element={
+          <AdminRoute user={user}>
+            <AddBook />
+          </AdminRoute>
+        } />
+
+        <Route path='/admin/books/addbookbyisbn' element={
+          <AdminRoute user={user}>
+            <AddBookByIsbn />
+          </AdminRoute>
+        } />
+
       </Routes>
     </>
   )
