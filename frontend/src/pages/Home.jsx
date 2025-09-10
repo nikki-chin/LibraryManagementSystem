@@ -46,8 +46,7 @@ const Home = ({ user, onLogout }) => {
 
     return (
         <>
-            <Header onSearch={handleSearch} onLogout={onLogout} user={user}/>
-            {!user && <p>Please login first.</p>}
+            <Header onSearch={handleSearch} onLogout={onLogout} user={user} />
             <BookList books={filteredBooks} />
         </>
 

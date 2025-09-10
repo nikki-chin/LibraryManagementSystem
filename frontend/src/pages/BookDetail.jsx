@@ -27,7 +27,7 @@ const BookDetail = ({ user }) => {
         if (!user) return;
 
         const borrowedBook = await borrowBook(id);
-        if(borrowedBook)
+        if (borrowedBook)
             alert(`You borrowed ${book.title}`);
     };
 
@@ -58,58 +58,58 @@ const BookDetail = ({ user }) => {
     }
 
     if (!book) {
-        return <p>book not found</p>
+        return <p>loading...</p>
     }
 
     return (
-        <div className={styles.bookDetailContainer}>
+        <div>
             <BackButton />
-            <div className={styles.leftColumn}>
-                <h2>{book.title}</h2>
-                <p>Author: {book.author}</p>
-                <p>ISBN: {book.isbn}</p>
-                <p>Genre: {book.genre}</p>
-                <p>Status: {book.availability}</p>
-                <p>{book.description}</p>
-                <p>{book.borrowedBy}</p>
+            <div className={styles.bookDetailContainer}>
+
+                <div className={styles.leftColumn}>
+                    <h2>{book.title}</h2>
+                    <p><strong>Author: </strong>{book.author}</p>
+                    <p><strong>ISBN: </strong>{book.isbn}</p>
+                    <p><strong>Genre: </strong>{book.genre}</p>
+                    <p><strong>Status: </strong>{book.availability}</p>
+                    <p><strong>Description: </strong>{book.description}</p>
 
 
-                {user?.role === "admin" && (
-                    <div className={styles.adminButtons}>
-                        <button onClick={handleEdit}>Edit Book</button>
-                        <button onClick={handleDelete}>Delete Book</button>
-                    </div>
-                )}
-            </div>
+                    {user?.role === "admin" && (
+                        <div className={styles.adminButtons}>
+                            <button onClick={handleEdit}>Edit Book</button>
+                            <button onClick={handleDelete}>Delete Book</button>
+                        </div>
+                    )}
+                </div>
 
-            <div className={styles.rightColumn}>
-                <img src={book.coverImage} alt="book cover" className={styles.coverImage} />
+                <div className={styles.rightColumn}>
+                    <img src={book.coverImage} alt="book cover" className={styles.coverImage} />
 
-                {(!user || user?.role === "user") && (
-                    <div className={styles.borrowSection}>
-                        <button
-                            disabled={!user || book.availability === "Not Available"}
-                            onClick={handleBorrow}
-                        >
-                            Borrow Book
-                        </button>
+                    {(!user || user?.role === "user") && (
+                        <div className={styles.borrowSection}>
+                            <button
+                                disabled={!user || book.availability === "Not Available"}
+                                onClick={handleBorrow}
+                            >
+                                Borrow Book
+                            </button>
 
-                        {!user && <p>Please login first to borrow this book.</p>}
-                    </div>
-                )}
-                {(book.availability === "Not Available" && user?.id === book.borrowedBy) && (
-                    <div className={styles.borrowSection}>
-                        <button
-                            onClick={handleReturn}
-                        >
-                            Return Book
-                        </button>
-                    </div>
-                )}
+                            {!user && <p>Please login first to borrow this book.</p>}
+                        </div>
+                    )}
+                    {(book.availability === "Not Available" && user?.id === book.borrowedBy) && (
+                        <div className={styles.borrowSection}>
+                            <button
+                                onClick={handleReturn}
+                            >
+                                Return Book
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
-
-
     );
 
 }

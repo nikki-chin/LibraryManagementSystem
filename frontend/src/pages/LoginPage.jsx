@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { login } from "../services/authService.js"
+import { login } from "../services/authService.js";
+import styles from './LoginPage.module.css';
+import BackButton from "../components/BackButton.jsx";
 
 
 const LoginPage = ({ setUser }) => {
@@ -34,37 +36,42 @@ const LoginPage = ({ setUser }) => {
     };
 
     return (
-        <div style={{ maxWidth: "400px", margin: "2rem auto" }}>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
+        <div>
+            <BackButton />
+            <div className={styles.loginContainer}>
+                
+                <h2 className={styles.loginTitle}>Login</h2>
 
-                <div style={{ marginTop: "1rem" }}>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
+                <form onSubmit={handleSubmit} className={styles.loginForm}>
+                    <div className={styles.formGroup}>
+                        <label>Email:</label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <button type="submit" style={{ marginTop: "1rem" }}>
-                    Login
-                </button>
-            </form>
-            {error && <p style={{ color: "red" }}>{error}</p>}
+                    <div className={styles.formGroup}>
+                        <label>Password:</label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
 
+                    <button type="submit" className={styles.loginButton}>
+                        Login
+                    </button>
+                </form>
 
+                {error && <p className={styles.errorMessage}>{error}</p>}
+            </div>
         </div>
     );
+
 }
 export default LoginPage

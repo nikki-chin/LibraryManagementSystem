@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getOneBookWithStatus, updateBook } from "../services/bookService.js";
 import styles from "./EditBook.module.css"
+import BackButton from "../components/BackButton.jsx";
 
 const EditBook = () => {
   const { id } = useParams();
@@ -47,38 +48,43 @@ const EditBook = () => {
 
   return (
     <div>
-      <h2>Edit Book</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Title</label>
-        <input
-          name="title"
-          value={bookData.title}
-          onChange={handleChange}
-          required
-        />
-        <label>Author</label>
-        <input
-          name="author"
-          value={bookData.author}
-          onChange={handleChange}
-          required
-        />
-        <label>ISBN</label>
-        <input
-          name="isbn"
-          value={bookData.isbn}
-          onChange={handleChange}
-        />
-        <label>Description</label>
-        <textarea
-          name="description"
-          value={bookData.description}
-          onChange={handleChange}
-        />
-        <button type="submit">Update</button>
-      </form>
+      <BackButton />
+
+      <div className={styles.editBookContainer}>
+        <h2>Edit Book</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Title</label>
+          <input
+            name="title"
+            value={bookData.title}
+            onChange={handleChange}
+            required
+          />
+          <label>Author</label>
+          <input
+            name="author"
+            value={bookData.author}
+            onChange={handleChange}
+            required
+          />
+          <label>ISBN</label>
+          <input
+            name="isbn"
+            value={bookData.isbn}
+            onChange={handleChange}
+          />
+          <label>Description</label>
+          <textarea
+            name="description"
+            value={bookData.description}
+            onChange={handleChange}
+          />
+          <button type="submit">Update</button>
+        </form>
+      </div>
     </div>
   );
+
 };
 
 export default EditBook;

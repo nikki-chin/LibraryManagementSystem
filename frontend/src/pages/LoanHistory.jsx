@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SingleLoanCard from "../components/SingleLoanCard";
-import { getMyLoans } from "../services/loanService.js"
+import { getMyLoans } from "../services/loanService.js";
+import BackButton from '../components/BackButton.jsx'
 
-const LoanHistory = ({user}) => {
-const [loans, setLoans] = useState([]);
+const LoanHistory = ({ user }) => {
+  const [loans, setLoans] = useState([]);
 
   useEffect(() => {
     const fetchLoans = async () => {
@@ -17,15 +18,16 @@ const [loans, setLoans] = useState([]);
     };
     fetchLoans();
   }, [user]);
-    return(
-        <div>
-        <h3>{user.name}'s' Loan History</h3>
-        {loans && loans.length === 0 ? (
+  return (
+    <div>
+      <BackButton />
+      <h3>Loan History</h3>
+      {loans && loans.length === 0 ? (
         <p>No loans found.</p>
       ) : (
         loans.map((loan) => <SingleLoanCard key={loan._id} loan={loan} />)
       )}
-        </div>
-    );
+    </div>
+  );
 }
 export default LoanHistory

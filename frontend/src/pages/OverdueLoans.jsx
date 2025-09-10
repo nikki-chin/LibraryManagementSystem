@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { getOverdueLoans } from "../services/loanService";
+import BackButton from "../components/BackButton";
+import styles from './OverdueLoans.module.css';
 
 const OverdueLoans = () => {
   const [loans, setLoans] = useState([]);
@@ -17,19 +19,23 @@ const OverdueLoans = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Overdue Loans</h2>
-      {loans.length === 0 ? (
-        <p>No overdue loans </p>
+    <div className={styles.container}>
+      <BackButton />
+      <h2 className={styles.title}>Overdue Loans</h2>
+
+      {loans?.length === 0 ? (
+        <p className={styles.empty}>No overdue loans</p>
       ) : (
-        loans.map((loan) => (
-          <div key={loan._id} style={{ border: "1px solid red", margin: "10px", padding: "10px" }}>
-            <p><b>Book:</b> {loan.bookId.title}</p>
-            <p><b>User:</b> {loan.userId.email}</p>
-            <p><b>Borrow Date:</b> {new Date(loan.borrowDate).toLocaleDateString()}</p>
-            <p><b>Due Date:</b> {new Date(loan.dueDate).toLocaleDateString()}</p>
-          </div>
-        ))
+        <div className={styles.loanList}>
+          {loans?.map((loan) => (
+            <div key={loan._id} className={styles.loanCard}>
+              <p><strong>Book:</strong> {loan.bookId?.title || "Unkown Book"}</p>
+              <p><strong>User:</strong> {loan.userId?.email || "Unkown User"}</p>
+              <p><strong>Borrow Date:</strong> {new Date(loan.borrowDate).toLocaleDateString()}</p>
+              <p><strong>Due Date:</strong> {new Date(loan.dueDate).toLocaleDateString()}</p>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

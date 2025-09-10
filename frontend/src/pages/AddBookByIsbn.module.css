@@ -1,0 +1,96 @@
+.container {
+    max-width: 650px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.fetchSection {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.fetchButton {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.fetchButton:hover {
+    background-color: #135ba1;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup label {
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+}
+
+input,
+textarea {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.coverPreview img {
+    margin-top: 1rem;
+    width: 120px;
+    border-radius: 8px;
+}
+
+.submitButton {
+    margin-top: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #218838;
+}
+
+.error {
+    color: red;
+    margin-top: 0.5rem;
+}
+
+.loading {
+    color: #555;
+}
+
+.success {
+    color: green;
+    margin-top: 1rem;
+}

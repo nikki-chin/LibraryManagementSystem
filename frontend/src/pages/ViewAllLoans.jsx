@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAllLoans } from "../services/loanService.js";
+import BackButton from "../components/BackButton.jsx";
+import styles from "./ViewAllLoans.module.css";
 
 const ViewAllLoans = () => {
     const [loans, setLoans] = useState([]);
@@ -17,20 +19,41 @@ const ViewAllLoans = () => {
     }, []);
 
     return (
-        <div>
-            <h2>All Loans</h2>
+        <div className={styles.container}>
+            <BackButton />
+            <h2 className={styles.title}>All Loans</h2>
+
             {loans?.length === 0 ? (
-                <p>No loans</p>
+                <p className={styles.empty}>No loans</p>
             ) : (
-                loans.map((loan) => (
-                    <div key={loan._id} style={{ border: "1px solid black", margin: "10px", padding: "10px" }}>
-                        <p><b>Book:</b> {loan.bookId?.title || "Unkown Book"}</p>
-                        <p><b>User:</b> {loan.userId?.email || "Unkown User"}</p>
-                        <p><b>Borrow Date:</b> {new Date(loan.borrowDate).toLocaleDateString()}</p>
-                    </div>
-                ))
+                <div className={styles.loanList}>
+                    {loans.map((loan) => (
+                        <div key={loan._id} className={styles.loanCard}>
+                            <p>
+                                <strong>Book:</strong> {loan.bookId?.title || "Unknown Book"}
+                            </p>
+                            <p>
+                                <strong>User:</strong> {loan.userId?.email || "Unknown User"}
+                            </p>
+                            <p>
+                                <strong>Borrow Date:</strong>{" "}
+                                {new Date(loan.borrowDate).toLocaleDateString()}
+                            </p>
+                            {loan.returnDate && (
+                                <p>
+                                    <strong>Returned On:</strong>{" "}
+                                    {new Date(loan.returnDate).toLocaleDateString()}
+                                </p>
+                            )}
+                            <p>
+                                <strong>Status:</strong> {loan.status}
+                            </p>
+                        </div>
+                    ))}
+                </div>
             )}
         </div>
     );
-}
-export default ViewAllLoans
+};
+
+export default ViewAllLoans;

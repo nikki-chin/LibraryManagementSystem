@@ -1,0 +1,53 @@
+.dashboardContainer {
+  padding: 2rem;
+  text-align: center;
+}
+
+.dashboardTitle {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboardCard {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboardCard:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.dashboardCard h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.dashboardCard p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.dashboardCard button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dashboardCard button:hover {
+  background-color: #135ba1;
+}

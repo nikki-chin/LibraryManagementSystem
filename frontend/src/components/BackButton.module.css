@@ -1,7 +1,8 @@
-.backbutton{
-    border: 1px solid black;
+.backbutton {
+    border: 1px solid #ddd;
     width: 50px;
     height: 30px;
     border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
     text-align: center;
 }

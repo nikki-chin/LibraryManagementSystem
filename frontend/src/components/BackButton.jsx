@@ -1,13 +1,16 @@
-import {Link} from 'react-router-dom';
-import styles from './BackButton.module.css'
+import { useNavigate } from "react-router-dom";
+import styles from "./BackButton.module.css";
 
-const BackButton = ({destination = '/'}) => {
-    return (
-        <div className={styles.backbutton}>
-            <Link to={destination}>
-                back
-            </Link>
-        </div>
-    )
-}
-export default BackButton
+const BackButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className={styles.backbutton}>
+      <button onClick={() => navigate(-1)}>
+        Back
+      </button>
+    </div>
+  );
+};
+
+export default BackButton;

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { addBook } from "../services/bookService.js";
 import axios from "axios";
+import styles from './AddBookByIsbn.module.css';
+import BackButton from "../components/BackButton.jsx";
 
 const AddBookByIsbn = () => {
 
@@ -72,95 +74,98 @@ const AddBookByIsbn = () => {
 
     return (
         <div>
-            <h2>Add New Book</h2>
-            <div>
-                <label>ISBN: </label>
-                <input
-                    type="text"
-                    value={isbn}
-                    onChange={(e) => setIsbn(e.target.value)}
-                />
+            <BackButton />
+            <div className={styles.container}>
+                <h2 className={styles.title}>Add New Book</h2>
 
-                <button onClick={fetchBookDetails}>
-                    Fetch book with Google API
-                </button>
-
-            </div>
-
-            {bookData && (<form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title: </label>
-                    <input
-                        type="text"
-                        name="title"
-                        value={bookData.title}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label>Author: </label>
-                    <input
-                        type="text"
-                        name="author"
-                        value={bookData.author}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div>
+                <div className={styles.fetchSection}>
                     <label>ISBN: </label>
                     <input
                         type="text"
-                        name="isbn"
-                        value={bookData.isbn}
-                        onChange={handleChange}
+                        value={isbn}
+                        onChange={(e) => setIsbn(e.target.value)}
+                        placeholder="Enter ISBN"
                     />
+                    <button onClick={fetchBookDetails} className={styles.fetchButton}>
+                        Fetch from Google API
+                    </button>
                 </div>
 
-                <div>
-                    <label>Genre: </label>
-                    <input
-                        type="text"
-                        name="genre"
-                        value={bookData.genre}
-                        onChange={handleChange}
-                    />
-                </div>
+                {bookData && (
+                    <form onSubmit={handleSubmit} className={styles.form}>
+                        <div className={styles.formGroup}>
+                            <label>Title</label>
+                            <input
+                                type="text"
+                                name="title"
+                                value={bookData.title}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-                <div>
-                    <label>Description: </label>
-                    <textarea
-                        type="text"
-                        name="description"
-                        value={bookData.description}
-                        onChange={handleChange}
-                    />
-                </div>
+                        <div className={styles.formGroup}>
+                            <label>Author</label>
+                            <input
+                                type="text"
+                                name="author"
+                                value={bookData.author}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-                <div>
-                    <label>CoverImage Url: </label>
-                    <input
-                        type="text"
-                        name="coverImage"
-                        value={bookData.coverImage}
-                        onChange={handleChange}
-                    />
-                </div>
+                        <div className={styles.formGroup}>
+                            <label>ISBN</label>
+                            <input
+                                type="text"
+                                name="isbn"
+                                value={bookData.isbn}
+                                disabled
+                            />
+                        </div>
 
-                <button type="submit">Add Book</button>
-            </form>
-            )}
+                        <div className={styles.formGroup}>
+                            <label>Genre</label>
+                            <input
+                                type="text"
+                                name="genre"
+                                value={bookData.genre}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-            {message && <p>{message}</p>}
+                        <div className={styles.formGroup}>
+                            <label>Description</label>
+                            <textarea
+                                name="description"
+                                value={bookData.description}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-            {bookData.coverImage && (
-                <div>
-                    <img src={bookData.coverImage} alt="Book cover" style={{ width: "120px" }} />
-                </div>
-            )}
+                        <div className={styles.formGroup}>
+                            <label>Cover Image URL</label>
+                            <input
+                                type="text"
+                                name="coverImage"
+                                value={bookData.coverImage}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        {bookData.coverImage && (
+                            <div className={styles.coverPreview}>
+                                <img src={bookData.coverImage} alt="Book cover" />
+                            </div>
+                        )}
+
+                        <button type="submit" className={styles.submitButton}>Add Book</button>
+                    </form>
+                )}
+
+                {message && <p className={styles.success}>{message}</p>}
+            </div>
         </div>
     );
 
