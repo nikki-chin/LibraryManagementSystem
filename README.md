@@ -1,21 +1,26 @@
 # Library Management System
 
-A comprehensive web-based library management system designed for librarians and users to efficiently manage books and track loans.
+A full-stack library management web application built with React.js, Express, and MongoDB. This project demonstrates user authentication, role-based access, CRUD operations, and API integration.
 
 ## Features
 
-**User Authentication:** Secure login system for librarians and general users using JWT.
+**User:** Browse books, borrow/return, view personal loan history
 
-**Library Data Management:** CRUD operations for users, books, contacts, and metadata.
+**Admin:** Manage books, add via form or Google Books API, view all loans, dashboard analytics
 
-**Loan & Return Tracking:** Logs borrowing transactions, returns, and fines.
+**Authentication:** JWT-based login and refresh token support
+
+**Search & Filter:** Find books by title, author, or genre; filter by availability
 
 ## Tech Stack
 
-**Frontend:** React.js
+**Frontend:** React.js, React Router DOM, Axios
 
 **Backend:** Express
 
 **Database:** MongoDB
 
 **Authentication:** JWT
+
+**APIs:** Google Books API for fetching book details by ISBN
+
