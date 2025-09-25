@@ -1,3 +1,6 @@
-export const PORT = 8080;
+import dotenv from "dotenv";
+dotenv.config();
 
-export const mongoDBURL = "mongodb+srv://user:user@librarymanagement.4rj8o0e.mongodb.net/libraryManagement?retryWrites=true&w=majority&appName=libraryManagement";
+export const PORT = process.env.PORT || 8080;
+
+export const mongoDBURL = process.env.mongoDBURL;
