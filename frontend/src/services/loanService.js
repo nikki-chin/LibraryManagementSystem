@@ -43,7 +43,7 @@ export async function getActiveLoans() {
 
 export async function getOverdueLoans() {
     try {
-        const response = await api.get("http://localhost:8080/loan/overdue");
+        const response = await api.get("/loan/overdue");
         return response.data;
     } catch (error) {
         console.log("get overdue loan error", error);
@@ -52,7 +52,7 @@ export async function getOverdueLoans() {
 
 export async function getMyLoans(userId) {
     try {
-        const response = await api.get(`http://localhost:8080/loan/${userId}`);
+        const response = await api.get(`/loan/${userId}`);
         return response.data;
     } catch (error) {
         console.log("get loan history error", error);
