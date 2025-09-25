@@ -2,6 +2,8 @@
 
 A full-stack library management web application built with React.js, Express, and MongoDB. This project demonstrates user authentication, role-based access, CRUD operations, and API integration.
 
+[Live Demo](https://librarymanagementsystem-frontend-6k3t.onrender.com)
+
 ## Features
 
 **User:** Browse books, borrow/return, view personal loan history
